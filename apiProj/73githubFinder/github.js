@@ -1,3 +1,8 @@
+// NOTE: The process Brad uses to authenticate (oauth) in the course will be
+// depricated in November 2020. I switched to using a 'personal access token'
+// (paTok) instead of client_id and client_secret in the query string. 
+
+
 class Github {
     constructor() {
         this.paTok = 'a115ec2a90bdf682f9571e1db2c066b1862df320';
