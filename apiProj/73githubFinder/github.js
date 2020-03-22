@@ -5,7 +5,10 @@
 
 class Github {
     constructor() {
-        this.paTok = '';
+        fetch('local.json')
+            .then(r => r.json())
+            .then(d => this.paTok = d.paToken)
+            .catch(e => console.log(e));
     }
 
     async getUser(user) {
