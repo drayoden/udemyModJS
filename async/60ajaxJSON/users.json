@@ -1,0 +1,37 @@
+[
+
+    {
+        "id": 1, 
+        "name": "Stormy Fuzz Pants",
+        "company": "FuzzyCat LLC", 
+        "phone": "1234567"
+    },
+
+    {
+        "id": 2, 
+        "name": "Stormy Forrest Johnson",
+        "company": "FooBar LLC", 
+        "phone": "3820287492373479027839847"
+    },
+
+    {
+        "id": 3, 
+        "name": "Forrest Moose Jaw",
+        "company": "Moose Jaw Robotics LLC", 
+        "phone": "3388"
+    },
+
+    {
+        "id": 4, 
+        "name": "Moosy Moose Pants",
+        "company": "Moose Pants LLC", 
+        "phone": "332873390938288"
+    },
+
+    {
+        "id": 5, 
+        "name": "Forrest Storms",
+        "company": "MooseCat LLC", 
+         "phone": "4"
+    }
+]
