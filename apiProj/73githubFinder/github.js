@@ -5,7 +5,7 @@
 
 class Github {
     constructor() {
-        this.paTok = 'a115ec2a90bdf682f9571e1db2c066b1862df320';
+        this.paTok = '';
     }
 
     async getUser(user) {
