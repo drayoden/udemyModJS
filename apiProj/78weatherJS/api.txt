@@ -1,0 +1,38 @@
+Using openweather API. uweather API Brad uses is not available for free.
+
+API call:
+api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
+api.openweathermap.org/data/2.5/weather?q={city name},{state}&appid={your api key}
+api.openweathermap.org/data/2.5/weather?q={city name},{state},{country code}&appid={your api key}
+
+TEST using browser (this works; cannot use state appriviation must use 'oregon'):
+api.openweathermap.org/data/2.5/weather?q=beaverton,oregon&appid=KEY
+
+
+q city name, state and country code divided by comma, use ISO 3166 country codes. You can specify the parameter not only in English. In this case, the API response should be returned in the same language as the language of requested location name if the location is in our predefined list of more than 200,000 locations.
+
+Units(Celcius, Fahrenheit...)
+standard api.openweathermap.org/data/2.5/find?q=London
+metric api.openweathermap.org/data/2.5/find?q=London&units=metric
+imperial api.openweathermap.org/data/2.5/find?q=London&units=imperial
+
+Weather icon (note 'icon' value and querystring below):
+"weather": [
+        {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10n"
+        }
+icon values can be xxn or xxd; n=night, d=day (not sure what '@2x.png' is yet or if it means anything)
+http://openweathermap.org/img/wn/10n@2x.png
+
+
+
+Blocking response:
+
+{
+"cod": 429,
+"message": "Your account is temporary blocked due to exceeding of requests limitation of your subscription type. 
+Please choose the proper subscription http://openweathermap.org/price"
+}
