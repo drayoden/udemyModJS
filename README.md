@@ -12,7 +12,6 @@ Some terms I always forget:
 
 ---
 ### Revisit the following when internet access is restored:
-+ weatherJS  -  API 
 + formValid  -  regEx
 + profScroller  - Iterator/Generator
 
