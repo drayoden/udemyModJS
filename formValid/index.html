@@ -15,14 +15,43 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-t mx-auto">
-                <h1>User Form</h1>
+            <div class="col-md-6 mx-auto">
+                <h2>User Form</h2>
                 <form>
+                    
                     <div class="form-group">
                         <label>Name</label>
-                        input:te
+                        <input type="text" class="form-control" id="name" placeholder="Name">
+                        <div class="invalid-feedback">
+                          Name must be between 2 and 10 characters
+                        </div>
                     </div>
-                </form>
+                    
+                    <div class="form-group">
+                      <label>Zipcode</label>
+                      <input type="text" class="form-control" id="zip" placeholder="Zipcode">
+                      <div class="invalid-feedback">
+                        Please enter a valid zipcode
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="text" class="form-control" id="email" placeholder="Email">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address: user@domain.tld
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input type="text" class="form-control" id="phone" placeholder="Phone">
+                      <div class="invalid-feedback">
+                        Please enter a valid phone number
+                      </div>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                  </form>
             </div>
         </div>
     </div>
