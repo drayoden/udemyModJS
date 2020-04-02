@@ -10,8 +10,4 @@ Some terms I always forget:
     
 + REST - Representational State Transfer  *(relies on stateless, client-server protocol; almost always HTTP)*
 
----
-### Revisit the following when internet access is restored:
-+ profScroller  - Iterator/Generator
-
 
