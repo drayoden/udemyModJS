@@ -1,6 +1,52 @@
-// ~~~~~~~~~~~~~~~~~~~~~~ storate contoller
+// ~~~~~~~~~~~~~~~~~~~~~~ storage contoller
+
+const StorageCtrl = (function() {
+
+    // public methods
+    return {
+
+        storeItem: function(item) {
+            let items;
+
+            // check local storage for items
+
+            if(localStorage.getItem('items') === null) {    // LS is empty
+                items = [];
+                
+                // push the new item
+                items.push(item);
+                // set LS
+                localStorage.setItem('items', JSON.stringify(items));
+            } else {
+                // get existing items from LS
+                items = JSON.parse(localStorage.getItem('items')); 
+
+                // push new item
+                items.push(item);
+
+                // reset LS
+                localStorage.setItem('items', JSON.stringify(items));
+            }
+        }, 
+
+        getItemsFromLS: function() {
+           
+            let items; 
+           
+           if (localStorage.getItem('items') === null ) {   // LS is empty
+                items = [];
+           } else {
+                items = JSON.parse(localStorage.getItem('items')); 
+           }
+
+           return items;
+
+        }, 
 
 
+    }
+
+})();
 
 
 
@@ -17,18 +63,22 @@ const ItemCtrl = (function() {
 
     // data structure/state
     const data = {
-        items: [
-            // {id:0,name: 'Fish Dinner', calories:1200},
-            // {id:1,name: 'Scone', calories:400},
-            // {id:2,name: 'Tootsie Rool', calories:300},
-        ],
+
+        // original data structure before LS was added:
+        // items: [
+        //     // {id:0,name: 'Fish Dinner', calories:1200},
+        //     // {id:1,name: 'Scone', calories:400},
+        //     // {id:2,name: 'Tootsie Rool', calories:300},
+        // ],
+
+        items: StorageCtrl.getItemsFromLS(),
         currentItem: null,
         totalCal: 0
     }
 
     // public return
     return {
-        getItems: function() {
+        getItems: function() {StorageCtrl
 
             return data.items;
         },
@@ -296,7 +346,7 @@ const UICtrl = (function() {
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~ app controller
-const App = (function(ItemCtrl,UICtrl) {
+const App = (function(ItemCtrl,StorageCtrl,UICtrl) {
     
     // load eventlisteners
     const loadEventListeners = function() {
@@ -354,6 +404,9 @@ const App = (function(ItemCtrl,UICtrl) {
 
             // add total calories to DOM
             UICtrl.showTotalCalories(totalCalories);
+
+            // local storage new item
+            StorageCtrl.storeItem(newItem);
 
             // clear inputs
             UICtrl.clearInputs();
@@ -486,7 +539,7 @@ const App = (function(ItemCtrl,UICtrl) {
             loadEventListeners();
         }
     }
-})(ItemCtrl,UICtrl); 
+})(ItemCtrl,StorageCtrl,UICtrl); 
 
 
 // init app
