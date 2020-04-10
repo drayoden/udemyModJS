@@ -2,4 +2,4 @@
 
 * install node.js (npm, etc.)
 
---* sudo apt install nodejs
+  `sudo apt install nodejs`
