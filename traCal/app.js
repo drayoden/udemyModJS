@@ -43,6 +43,39 @@ const StorageCtrl = (function() {
 
         }, 
 
+        updateItemStorage: function(updatedItem) {
+            let items = JSON.parse(localStorage.getItem('items'));
+
+            items.forEach(function(item, index){
+                if(updatedItem.id === item.id){
+                    items.splice(index, 1, updatedItem);
+                }
+
+            }); 
+
+            // reset LS
+            localStorage.setItem('items', JSON.stringify(items));
+        },
+
+        deleteItemFromStorage: function(id) {
+            let items = JSON.parse(localStorage.getItem('items'));
+
+            items.forEach(function(item, index){
+                if(id === item.id){
+                    items.splice(index, 1);
+                }
+
+            }); 
+
+            // reset LS
+            localStorage.setItem('items', JSON.stringify(items));
+            
+
+        },
+
+        clearAllStorageItems: function() {
+            localStorage.removeItem('items');
+        }, 
 
     }
 
@@ -274,7 +307,7 @@ const UICtrl = (function() {
                 const itemID = listItem.getAttribute('id');
 
                 if(itemID === `item-${item.id}`) {
-                    document.queclearBtnrySelector(`#${itemID}`).innerHTML = 
+                    document.querySelector(`#${itemID}`).innerHTML = 
                     `
                     <strong>${item.name}: </strong><em>${item.calories} Calories</em>
                     <a href="" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a>
@@ -461,6 +494,9 @@ const App = (function(ItemCtrl,StorageCtrl,UICtrl) {
         // add total calories to DOM
         UICtrl.showTotalCalories(totalCalories);
 
+        // update LS
+        StorageCtrl.updateItemStorage(updatedItem); 
+
         UICtrl.clearEditState();
 
         e.preventDefault();
@@ -483,6 +519,9 @@ const App = (function(ItemCtrl,StorageCtrl,UICtrl) {
         // add total calories to DOM
         UICtrl.showTotalCalories(totalCalories);
 
+        // delete from LS
+        StorageCtrl.deleteItemFromStorage(currentItem.id);
+
         UICtrl.clearEditState();
 
         e.preventDefault();
@@ -499,9 +538,11 @@ const App = (function(ItemCtrl,StorageCtrl,UICtrl) {
         // add total calories to DOM
         UICtrl.showTotalCalories(totalCalories);
 
-
         // remove all items from UI
         UICtrl.removeItems();
+
+        // clear all items from LS
+        StorageCtrl.clearAllStorageItems();
 
         // hide the ul
         UICtrl.hideList();
