@@ -1,18 +1,3 @@
-### Some dependencies for this project:
-
-* install node.js (npm, etc.)
-
-  `sudo apt install nodejs`
-  `sudo apt install npm`
-
-  ___
-  ___
-  ___
-
-### Original REAME.md file from Brad's respository for this project: 
-
-[Brad's repsoitory](https://github.com/bradtraversy/babel_webpack_starter)
-
 # Babel Webpack Starter
 
 A starter pack to build JavaScript applications using standards from ES2015, ES2016 & ES2017. It uses webpack, Babel and webpack-dev-server to compile and serve. It is fully compatible with Async/Await as it uses the Babel polyfill.
