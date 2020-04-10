@@ -37,10 +37,19 @@
                             <input type="number" placeholder="Add Calories" id="item-calories">
                             <label for="item-calories">Calories</label>
                         </div>   
+
+                        <!-- NOTE: buttons will default to type="submit" if 'type' does not exist -->
+                        <!-- this was an issue with the Back button (.back-btn) below when Brad -->
+                        <!-- used an inline function to clear the edit state in the button event listener -->
+                        <!-- (UICtrl.clearEditState). This caused the button to refresh the page and thus -->
+                        <!-- clear all data etc. Up until this point Brad had always prevented default -->
+                        <!-- behavior by (e.preventDefault()) on all buttons but this time it was not used. -->
+                        <!-- If the 'type' is changed to button (type="button") this solves the problem. -->
+
                         <button class="add-btn btn blue darken-3"><i class="fa fa-plus"></i> Add Meal</button>                     
                         <button class="update-btn btn orange"><i class="fa fa-pencil-square-o"></i> Update Meal</button>                     
-                        <button class="delete-btn btn red "><i class="fa fa-remove"></i> Delete Meal</button>                     
-                        <button class="back-btn btn grey pull-right"><i class="fa fa-chevron-circle-left"></i> Back</button>                     
+                        <button type="button" class="delete-btn btn red "><i class="fa fa-remove"></i> Delete Meal</button>                     
+                        <button type="button" class="back-btn btn grey pull-right"><i class="fa fa-chevron-circle-left"></i> Back</button>                     
                     </div>
                 </form>
             </div>

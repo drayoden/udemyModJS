@@ -98,6 +98,25 @@ const ItemCtrl = (function() {
             return found; 
         },
 
+        deleteItem: function(id) {
+
+            // get ids 
+            ids = data.items.map(function(item) {
+                return item.id
+            });
+
+            // get index
+            const index = ids.indexOf(id);
+
+            // remove item
+            data.items.splice(index, 1);
+
+
+        },
+
+        clearAllListItems: function() {
+            data.items = [];
+        },
 
 
         setCurrentItem: function(item) {
@@ -125,16 +144,16 @@ const UICtrl = (function() {
     
     // central control of any selectors 
     const UISelectors = {
-        itemList: '#item-list',
-        addBtn: '.add-btn',
-        updateBtn: '.update-btn',
-        deleteBtn: '.delete-btn',
-        backBtn: '.back-btn',
-        itemNameInput: '#item-name',
-        itemCalInput: '#item-calories',
-        totalCalories: '.total-calories',
-        listItems: '#item-list li'
-
+        itemList:       '#item-list',
+        addBtn:         '.add-btn',
+        updateBtn:      '.update-btn',
+        deleteBtn:      '.delete-btn',
+        backBtn:        '.back-btn',
+        itemNameInput:  '#item-name',
+        itemCalInput:   '#item-calories',
+        totalCalories:  '.total-calories',
+        listItems:      '#item-list li',
+        clearBtn:       '.clear-btn'
     }
 
     // public return
@@ -205,13 +224,30 @@ const UICtrl = (function() {
                 const itemID = listItem.getAttribute('id');
 
                 if(itemID === `item-${item.id}`) {
-                    document.querySelector(`#${itemID}`).innerHTML = 
+                    document.queclearBtnrySelector(`#${itemID}`).innerHTML = 
                     `
                     <strong>${item.name}: </strong><em>${item.calories} Calories</em>
                     <a href="" class="secondary-content"><i class="edit-item fa fa-pencil"></i></a>
                     `; 
                 }
             });
+        },
+
+        deleteListItem: function(id) {
+            const itemID = `#item-${id}`; 
+            const item = document.querySelector(itemID);
+            item.remove();
+        },
+
+        removeItems: function() {
+            let listItems = document.querySelectorAll(UISelectors.listItems);
+
+            // convert node list to array
+            listItems = Array.from(listItems);
+
+            listItems.forEach(function(item) {
+                item.remove();
+            })
         },
 
         clearInputs: function() {
@@ -277,12 +313,23 @@ const App = (function(ItemCtrl,UICtrl) {
             }
         });
         
-        // edit item event - must use event delegation because this is dynamically loaded after an
+
+        // edit item event - (<i> pencil icon) must use event delegation because this is dynamically loaded after an
         // item is added - this targets the ul only - remaining logic in callback.
         document.querySelector(UISelectors.itemList).addEventListener('click', itemEditClick);
 
         // update item event
         document.querySelector(UISelectors.updateBtn).addEventListener('click', itemUpdateSubmit);
+
+        // back button event
+        document.querySelector(UISelectors.backBtn).addEventListener('click', UICtrl.clearEditState);
+
+        // delete item event 
+        document.querySelector(UISelectors.deleteBtn).addEventListener('click', itemDeleteSubmit);
+
+        // clear all event -> button in nav bar right side
+        document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItems);
+
 
 
     }
@@ -317,10 +364,11 @@ const App = (function(ItemCtrl,UICtrl) {
     // item submit
     const itemEditClick = function(e) {
         
+
         // targets the 'pencil' icon with class '.edit-item' -- see commented html
         if(e.target.classList.contains('edit-item')){
             
-            // get list item ID -- this targets the parent->parent 'li'->'id' attribute
+            // get list item ID -- this targets the parent->parent: (<a> -> li'->'id') attribute
             const listId = e.target.parentNode.parentNode.id;
             
             // get only the digit from the listID - id="item-x"
@@ -332,6 +380,7 @@ const App = (function(ItemCtrl,UICtrl) {
             
             // set the currentItem
             ItemCtrl.setCurrentItem(itemToEdit);
+
 
             // add item to form 
             UICtrl.addItemToForm();
@@ -362,6 +411,49 @@ const App = (function(ItemCtrl,UICtrl) {
         UICtrl.clearEditState();
 
         e.preventDefault();
+    }
+
+    // delete item submit
+    const itemDeleteSubmit = function(e) {
+        // get item id from currentItem
+        const currentItem = ItemCtrl.getCurrentItem();
+
+        // delete item from data structure
+        ItemCtrl.deleteItem(currentItem.id); 
+
+        // delete from UI
+        UICtrl.deleteListItem(currentItem.id);
+
+        // get total calories
+        const totalCalories = ItemCtrl.getTotalCalories(); 
+
+        // add total calories to DOM
+        UICtrl.showTotalCalories(totalCalories);
+
+        UICtrl.clearEditState();
+
+        e.preventDefault();
+    }
+
+    // clear all items
+    const clearAllItems = function() {
+        // delete all items from data structure
+        ItemCtrl.clearAllListItems(); 
+
+        // get total calories
+        const totalCalories = ItemCtrl.getTotalCalories(); 
+
+        // add total calories to DOM
+        UICtrl.showTotalCalories(totalCalories);
+
+
+        // remove all items from UI
+        UICtrl.removeItems();
+
+        // hide the ul
+        UICtrl.hideList();
+
+
     }
 
 
