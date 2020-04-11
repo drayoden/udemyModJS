@@ -3,13 +3,14 @@
 * install node.js (npm, etc.)
 
   `sudo apt install nodejs`
+  
   `sudo apt install npm`
 
   ___
   ___
   ___
 
-### Original REAME.md file from Brad's respository for this project: 
+### Original README.md file from Brad's respository for this project: 
 
 [Brad's repsoitory](https://github.com/bradtraversy/babel_webpack_starter)
 
