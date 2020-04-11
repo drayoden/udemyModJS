@@ -1,0 +1,48 @@
+
+
+~~~~~~~~~~~~~~~~   module1.js: 
+
+
+// Common JS module
+
+module.exports = {
+    name: 'MooseToes', 
+    email: 'moosy@bogus.net',
+    phone: '3338988'
+}
+
+
+~~~~~~~~~~~~~~~~   module2.js: 
+
+// ES2015
+
+export const person ={
+    name: 'Stormy',
+    age: 3
+}
+
+export function sayHello() {
+    return `Hello ${person.name}`; 
+}
+
+const greeting = 'Hello World';
+
+export default greeting;
+
+~~~~~~~~~~~~~~~~   app.js: 
+
+// common JS mddule syntax:
+// const person = require('./mymodule1');
+// console.log (person.name);
+
+// ES2015:
+// import { person, sayHello } from './mymodule2';
+// console.log(person.name);
+// console.log(sayHello());
+
+// import * as mod from './mymodule2';
+// console.log(mod.person.name);
+// console.log(mod.sayHello());
+
+import greeting from './mymodule2';
+console.log(greeting);
