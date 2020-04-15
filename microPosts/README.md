@@ -1,11 +1,9 @@
 ### Some dependencies for this project:
 
-* install node.js (npm, etc.)
+* install node.js (npm, etc.)  -- see popSystems gist
 
-  `sudo apt install nodejs`
-  
-  `sudo apt install npm`
-
+* Create JSON server (116) - `npm install json-server --save` 
+  * (https://github.com/typicode/json-server)
   ___
   ___
   ___
