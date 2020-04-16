@@ -1,9 +1,15 @@
 ### Some dependencies for this project:
 
 * install node.js (npm, etc.)  -- see popSystems gist
+ * run server -- `npm run start`
 
 * Create JSON server (116) - `npm install json-server --save` 
   * (https://github.com/typicode/json-server)
+  * create 'db.json' file 
+  * add command to package.json -- `"<key>": "json-server --watch <dir to 'db.json'>` 
+  * run json server -- `npm run json:server`
+
+* Final build -- `npm run build` -- this packs everything into /build (one file?) for production.
   ___
   ___
   ___
